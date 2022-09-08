@@ -10,7 +10,10 @@ app.get('/', (req, res) => {
 
 app.get('/test', (req, res) => {
     console.log(req.headers)
-    res.setHeader('set-cookie', ['loveyou=true','bishop=white;domain=.','fav=gilbert;path=/cookies','song=starts;path=/test',])
+    const expDate = new Date(new Date().getTime() + 1 * 60 * 1000) // 1 minute from now
+    const expDateStr = expDate.toUTCString();
+    console.log(expDate, 'str', expDateStr)
+    res.setHeader('set-cookie', ['loveyou=true',`hateyou=false;expires=${expDateStr}`,'annoyedwithyou=yes; Max-Age=30'])
     res.send('I love you')
 })
 
