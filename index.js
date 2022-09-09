@@ -1,6 +1,8 @@
-const { Console } = require('console');
 const express = require('express');
+const cors = require('cors');
 const app = express();
+
+app.use(cors());
 
 app.get('/', (req, res) => {
     console.log(req.headers)
@@ -13,7 +15,7 @@ app.get('/test', (req, res) => {
     const expDate = new Date(new Date().getTime() + 1 * 60 * 1000) // 1 minute from now
     const expDateStr = expDate.toUTCString();
     console.log(expDate, 'str', expDateStr)
-    res.setHeader('set-cookie', ['loveyou=true',`hateyou=false;expires=${expDateStr}`,'annoyedwithyou=yes; Max-Age=30'])
+    res.setHeader('set-cookie', ['loveyou=true',`hateyou=false;expires=${expDateStr}`,'annoyedwithyou=yes; Max-Age=30', 'myname=gilbert;samesite=strict', 'yourname=joe;samesite=lax'])
     res.send('I love you')
 })
 
